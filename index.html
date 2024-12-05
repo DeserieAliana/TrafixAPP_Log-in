@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Authentication</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .auth-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+
+        .auth-container h2 {
+            margin-bottom: 20px;
+        }
+
+        .auth-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .auth-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+
+        .auth-container button:hover {
+            background-color: #555;
+        }
+
+        .forgot-password {
+            margin-top: 10px;
+            display: block;
+            color: #007BFF;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .toggle-link {
+            margin-top: 15px;
+            color: #007BFF;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <h2 id="auth-title">Sign In</h2>
+
+        <!-- Google or Facebook Login Options -->
+        <button onclick="googleLogin()">Sign in with Google</button>
+        <button onclick="facebookLogin()">Sign in with Facebook</button>
+
+        <div id="manual-login">
+            <p>or</p>
+            <input type="text" id="username" placeholder="Enter Username">
+            <input type="password" id="password" placeholder="Enter Password">
+            <button onclick="handleLogin()">Log In</button>
+            <a href="#" class="forgot-password" onclick="handleForgotPassword()">Forgot Password?</a>
+        </div>
+
+        <!-- Toggle between Sign Up and Log In -->
+        <p id="toggle-link" class="toggle-link" onclick="toggleAuth()">Already have an account? Log In</p>
+    </div>
+
+    <script>
+        let isSignUp = true;
+
+        // Toggle between Sign Up and Log In views
+        function toggleAuth() {
+            isSignUp = !isSignUp;
+            if (isSignUp) {
+                document.getElementById('auth-title').textContent = 'Sign In';
+                document.getElementById('toggle-link').textContent = 'Already have an account? Log In';
+                document.getElementById('manual-login').style.display = 'none';
+            } else {
+                document.getElementById('auth-title').textContent = 'Log In';
+                document.getElementById('toggle-link').textContent = 'Create an account? Sign In';
+                document.getElementById('manual-login').style.display = 'block';
+            }
+        }
+
+        // Handle Google Login (for testing purposes)
+        function googleLogin() {
+            alert('You are logged in with Google.');
+            // Actual Google OAuth code will go here
+        }
+
+        // Handle Facebook Login (for testing purposes)
+        function facebookLogin() {
+            alert('You are logged in with Facebook.');
+            // Actual Facebook OAuth code will go here
+        }
+
+        // Handle Log In and Sign Up for Manual Entry
+        function handleLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (isSignUp) {
+                alert(`Sign Up Successful! Welcome, ${username}!`);
+            } else {
+                alert('Log In Successful!');
+            }
+        }
+
+        // Handle Forgot Password
+        function handleForgotPassword() {
+            const method = prompt("Forgot Password? How would you like to receive a recovery code? (Email/Phone)");
+
+            if (method.toLowerCase() === 'email') {
+                alert("A code will be sent to your email.");
+            } else if (method.toLowerCase() === 'phone') {
+                alert("A code will be sent to your phone.");
+            } else {
+                alert("Invalid input. Please enter 'Email' or 'Phone'.");
+            }
+        }
+    </script>
+</body>
+</html>
